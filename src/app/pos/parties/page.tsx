@@ -94,38 +94,40 @@ export default function Page() {
     values: any,
     { setFieldError, setSubmitting, resetForm }: any
   ) => {
-    const value = {
-      partyName: values.partyName,
-      gstNumber: values.GSTIN,
-      phoneNum: values.phoneNumber,
-      gstType: gstvalues?.Gsttype,
-      state: gstvalues?.State,
-      email: gstvalues?.email,
-      billingAddress: gstvalues?.Billingaddress,
-      shippingAddress: gstvalues?.Shippingaddress || undefined,
-      openingBalance: creditvalues?.openingbalance,
-      asOfDate: creditvalues?.date,
-      creditLimit: creditvalues?.CreditLimit || undefined,
-      user: {
-        id: userid,
-      },
-    };
-    try {
-      setSubmitting(true);
-      auth
-        .AddfirmParty(value, token, firmid)
-        .then((res) => {})
-        .catch((err) => {
-          console.log(err);
-        });
-        setOpen(true)
-      resetForm();
-      setModalopen(false);
-    } catch (err) {
-      console.log("Error:", err);
-    } finally {
-      setSubmitting(false);
-    }
+    console.log(values , "values");
+    
+    // const value = {
+    //   partyName: values.partyName,
+    //   gstNumber: values.GSTIN,
+    //   phoneNum: values.phoneNumber,
+    //   gstType: gstvalues?.Gsttype,
+    //   state: gstvalues?.State,
+    //   email: gstvalues?.email,
+    //   billingAddress: gstvalues?.Billingaddress,
+    //   shippingAddress: gstvalues?.Shippingaddress || undefined,
+    //   openingBalance: creditvalues?.openingbalance,
+    //   asOfDate: creditvalues?.date,
+    //   creditLimit: creditvalues?.CreditLimit || undefined,
+    //   user: {
+    //     id: userid,
+    //   },
+    // };
+    // try {
+    //   setSubmitting(true);
+    //   auth
+    //     .AddfirmParty(value, token, firmid)
+    //     .then((res) => {})
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    //     setOpen(true)
+    //   resetForm();
+    //   setModalopen(false);
+    // } catch (err) {
+    //   console.log("Error:", err);
+    // } finally {
+    //   setSubmitting(false);
+    // }
   };
 
   useEffect(() => {
@@ -295,25 +297,26 @@ console.log(gstvalues , "gstvalues");
               phoneNumber: "",
             }}
             validationSchema={validationSchema}
-            onSubmit={submitForm}
+            // onSubmit={submitForm}
+            onSubmit={(values, { setSubmitting }) => {
+                     console.log(values , "values");
+                     
+            }}        
           >
             {({
               isSubmitting,
               handleChange,
               values,
-              handleSubmit,
-              touched,
-              errors,
-            }) => (
+             }) => (
               <>
                 <div className="flex justify-between mt-5 pb-3 border-b border-groove">
                   <div className="">Add Parties</div>
-                  <div
-                    className="bg-[#fda80c] rounded-lg px-5 text-white py-2"
-                    onClick={() => handleSubmit()}
+                  <button
+                  type="submit"
+                    className="bg-[#fda80c] rounded-lg px-5 text-white py-2 cursor-pointer"
                   >
                     Save
-                  </div>
+                  </button>
                 </div>
                 <div className="flex gap-5 my-5 w-full">
                   <div className="w-[33%]">

@@ -4,7 +4,7 @@ import "../globals.css";
 import NextAuthSessionProvider from "./providers/nextAuthSessionProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ["latin"] });
 const RobotoRegular = Roboto({
